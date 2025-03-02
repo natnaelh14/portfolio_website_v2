@@ -1,46 +1,56 @@
-"use client"
+"use client";
 
-import { Download, Mail, Github, Linkedin, Twitter } from "lucide-react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { ProjectCard } from "@/components/project-card"
-import { ContactForm } from "@/components/contact-form"
-import { ScrollAnimation } from "@/components/scroll-animation"
-import { StaggerAnimation } from "@/components/stagger-animation"
-import { NavLink } from "@/components/nav-link"
-import { motion } from "framer-motion"
-import { Card, CardContent } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { NavDropdown } from "@/components/nav-dropdown"
-import { SingleTypewriter } from "@/components/single-typewriter"
-
-const navigationLinks = [
-  { href: "#home", label: "home", number: "01" },
-  { href: "#about", label: "about", number: "02" },
-  { href: "#experience", label: "experience", number: "03" },
-  { href: "#projects", label: "projects", number: "04" },
-  { href: "#contact", label: "contact", number: "05" },
-]
-
-const skills = {
-  frontend: ["HTML5", "CSS3", "Styled Components", "React", "TypeScript"],
-  backend: ["JavaScript", "Redux"],
-  other: ["Tailwind", "jQuery", "Next.js"],
-}
+import { Download, Mail, Github, Linkedin, Twitter } from "lucide-react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ProjectCard } from "@/components/project-card";
+import { ContactForm } from "@/components/contact-form";
+import { ScrollAnimation } from "@/components/scroll-animation";
+import { StaggerAnimation } from "@/components/stagger-animation";
+import { NavLink } from "@/components/nav-link";
+import { motion } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { NavDropdown } from "@/components/nav-dropdown";
+import { SingleTypewriter } from "@/components/single-typewriter";
+import Image from "next/image";
+import {
+  backEndTech,
+  frontEndTech,
+  navigationLinks,
+  otherTech,
+  workExperience,
+  education,
+} from "@/constants";
+import { useEffect, useState } from "react";
+import { LoadAnimation } from "@/components/LoadAnimation/load-animation";
 
 export default function Home() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
+
+  if (loading) return <LoadAnimation />;
+
   return (
     <div className="dark min-h-screen bg-background text-foreground overflow-hidden">
       <header className="fixed top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
+        <div className="container flex h-18 items-center justify-between">
           <Link href="/" className="font-mono text-lg">
-            <span className="text-primary">John</span>
-            <span className="text-muted-foreground">Doe</span>
-            <span className="text-primary">._</span>
+            <Image src="/images/logo.png" alt="" height={75} width={75} />
           </Link>
           <nav className="hidden xl:flex items-center space-x-8">
             {navigationLinks.map((link) => (
-              <NavLink key={link.href} href={link.href} number={link.number} label={link.label} />
+              <NavLink
+                key={link.href}
+                href={link.href}
+                number={link.number}
+                label={link.label}
+              />
             ))}
           </nav>
           <div className="flex items-center gap-2">
@@ -70,10 +80,13 @@ export default function Home() {
             >
               <div className="space-y-4">
                 <h1 className="font-heading text-7xl sm:text-8xl font-bold tracking-tight">
-                  <SingleTypewriter text="JOHN DOE" className="text-foreground" />
+                  <SingleTypewriter
+                    text="NATNAEL HAILE"
+                    className="text-foreground"
+                  />
                 </h1>
                 <p className="font-mono text-xl text-muted-foreground tracking-wide">
-                  SOFTWARE ENGINEER, FRONT END & FULL STACK DEVELOPER.
+                  FULL STACK SOFTWARE ENGINEER.
                 </p>
               </div>
 
@@ -82,30 +95,42 @@ export default function Home() {
                   <Link href="#contact">Contact Me</Link>
                 </Button>
                 <Button variant="outline" asChild>
-                  <Link href="#projects">View Projects</Link>
+                  <Link href="#about">About Me</Link>
                 </Button>
               </div>
 
               <div className="flex gap-4">
-                <Link href="https://github.com" target="_blank" rel="noopener noreferrer">
+                <Link
+                  href="https://github.com/natnaelh14"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Button variant="ghost" size="icon">
                     <Github className="h-5 w-5" />
                     <span className="sr-only">GitHub</span>
                   </Button>
                 </Link>
-                <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                <Link
+                  href="https://www.linkedin.com/in/natnaelhaile/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Button variant="ghost" size="icon">
                     <Linkedin className="h-5 w-5" />
                     <span className="sr-only">LinkedIn</span>
                   </Button>
                 </Link>
-                <Link href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+                <Link
+                  href="https://x.com/NatnaelH"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Button variant="ghost" size="icon">
                     <Twitter className="h-5 w-5" />
                     <span className="sr-only">Twitter</span>
                   </Button>
                 </Link>
-                <Link href="mailto:email@example.com">
+                <Link href="mailto:haile.natnael@natnaeldev.com">
                   <Button variant="ghost" size="icon">
                     <Mail className="h-5 w-5" />
                     <span className="sr-only">Email</span>
@@ -115,7 +140,6 @@ export default function Home() {
             </motion.div>
           </div>
         </section>
-
         <section id="about" className="relative py-12 md:py-24 lg:py-32">
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute bottom-1/4 right-1/3 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
@@ -127,31 +151,31 @@ export default function Home() {
               <ScrollAnimation className="lg:w-1/2">
                 <div className="space-y-4">
                   <div className="space-y-2 text-center">
-                    <div className="font-mono text-sm text-primary">02 // about me</div>
-                    <h2 className="font-heading text-3xl leading-[1.1] sm:text-4xl md:text-5xl">WHO I AM</h2>
+                    <div className="font-mono text-sm text-primary">
+                      02 // about me
+                    </div>
+                    <h2 className="font-heading text-3xl leading-[1.1] sm:text-4xl md:text-5xl">
+                      WHO I AM
+                    </h2>
                   </div>
-                  <p className="text-muted-foreground">
-                    I'm a passionate web developer with a focus on creating beautiful, functional, and accessible
-                    websites. With over 5 years of experience in the industry, I've worked on a variety of projects from
-                    small business websites to large-scale web applications.
-                  </p>
-                  <p className="text-muted-foreground">
-                    My expertise includes front-end development with React, Next.js, and TypeScript, as well as back-end
-                    development with Node.js and Express. I'm always eager to learn new technologies and improve my
-                    skills.
-                  </p>
-                  <p className="text-muted-foreground">
-                    When I'm not coding, you can find me hiking, reading, or experimenting with new recipes in the
-                    kitchen.
+                  <p className="text-muted-foreground text-center">
+                    I am a Full-Stack Software Engineer with a Bachelor's Degree
+                    and 3 years of professional development experience.
+                    Proactive team player with great adaptability in dynamic
+                    environments, and proven track record of delivering
+                    products. Passionate, detail-oriented, and curious developer
+                    leveraging professional and technical skills to solve
+                    problems. I like to bring unique ideas to life using the
+                    tools below.
                   </p>
                 </div>
               </ScrollAnimation>
 
               <ScrollAnimation className="lg:w-1/2">
                 <div className="flex items-center justify-center">
-                  <div className="overflow-hidden rounded-xl border bg-card/30 backdrop-blur-sm">
+                  <div className="overflow-hidden rounded-2xl border bg-card/30 backdrop-blur-sm">
                     <img
-                      src="/placeholder.svg?height=400&width=400"
+                      src="/images/portrait.png"
                       alt="Profile"
                       className="aspect-square object-cover transition-all hover:scale-105"
                       width={400}
@@ -179,8 +203,8 @@ export default function Home() {
                   </TabsList>
                   <div className="mt-8">
                     <TabsContent value="frontend" className="mt-8">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {skills.frontend.map((skill) => (
+                      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                        {frontEndTech.map((skill) => (
                           <div
                             key={skill}
                             className="p-4 text-center rounded-md bg-gradient-to-br from-card/30 via-card/30 to-secondary/5 backdrop-blur-sm border border-border/50 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(249,191,63,0.15)] transition-all duration-300 hover:-translate-y-0.5"
@@ -192,8 +216,8 @@ export default function Home() {
                     </TabsContent>
 
                     <TabsContent value="backend" className="mt-8">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {skills.backend.map((skill) => (
+                      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                        {backEndTech.map((skill) => (
                           <div
                             key={skill}
                             className="p-4 text-center rounded-md bg-gradient-to-br from-card/30 via-card/30 to-secondary/5 backdrop-blur-sm border border-border/50 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(249,191,63,0.15)] transition-all duration-300 hover:-translate-y-0.5"
@@ -205,8 +229,8 @@ export default function Home() {
                     </TabsContent>
 
                     <TabsContent value="other" className="mt-8">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {skills.other.map((skill) => (
+                      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                        {otherTech.map((skill) => (
                           <div
                             key={skill}
                             className="p-4 text-center rounded-md bg-gradient-to-br from-card/30 via-card/30 to-secondary/5 backdrop-blur-sm border border-border/50 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(249,191,63,0.15)] transition-all duration-300 hover:-translate-y-0.5"
@@ -233,8 +257,12 @@ export default function Home() {
             <div className="mx-auto max-w-[64rem] space-y-8">
               <ScrollAnimation>
                 <div className="space-y-2 text-center">
-                  <div className="font-mono text-sm text-primary">03 // experience</div>
-                  <h2 className="font-heading text-3xl leading-[1.1] sm:text-4xl md:text-5xl">WHERE I'VE WORKED</h2>
+                  <div className="font-mono text-sm text-primary">
+                    03 // experience
+                  </div>
+                  <h2 className="font-heading text-3xl leading-[1.1] sm:text-4xl md:text-5xl">
+                    WHERE I'VE WORKED
+                  </h2>
                 </div>
               </ScrollAnimation>
 
@@ -249,129 +277,80 @@ export default function Home() {
                     </TabsTrigger>
                   </TabsList>
                   <TabsContent value="experience" className="mt-6 space-y-6">
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4 }}
-                    >
-                      <Card className="bg-[#1a1a1a] border-0">
-                        <CardContent className="p-6">
-                          <div className="space-y-4">
-                            <div className="flex items-center">
-                              <div className="flex items-center">
-                                <div>
-                                  <h3 className="text-2xl font-semibold text-white">Senior Frontend Developer</h3>
-                                  <p className="text-[#e64861] text-lg">Tech Innovations Inc.</p>
+                    {workExperience.map((job, index) => {
+                      return (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.4, delay: index * 0.2 }}
+                        >
+                          <Card className="bg-[#1a1a1a] border-0">
+                            <CardContent className="p-6">
+                              <div className="space-y-4">
+                                <div className="flex justify-between items-start">
+                                  <div className="flex items-center">
+                                    <div>
+                                      <h3 className="text-2xl font-semibold text-white">
+                                        {job.title}
+                                      </h3>
+                                      <p className="text-[#e64861] text-lg">
+                                        {job.company}
+                                      </p>
+                                    </div>
+                                  </div>
+                                  <span className="text-sm text-muted-foreground shrink-0 pt-2">
+                                    {job.date}
+                                  </span>
                                 </div>
+                                <ul className="space-y-4">
+                                  {job.description?.map((item, index) => (
+                                    <li
+                                      key={index}
+                                      className="text-[#888] pl-6 relative before:absolute before:left-0 before:top-[0.5em] before:h-2 before:w-2 before:rounded-full before:bg-primary/80 before:ring-[2px] before:ring-primary/20 before:transition-all hover:before:scale-125 hover:before:bg-primary"
+                                    >
+                                      {item}
+                                    </li>
+                                  ))}
+                                </ul>
                               </div>
-                              <span className="text-sm text-muted-foreground shrink-0">2021 - Present</span>
-                            </div>
-                            <ul className="space-y-2">
-                              {[
-                                "Led the development of the company's flagship web application using Next.js and TypeScript",
-                                "Implemented CI/CD pipelines using GitHub Actions and Vercel",
-                                "Mentored junior developers and conducted code reviews",
-                                "Reduced page load times by 40% through performance optimizations",
-                              ].map((item, index) => (
-                                <li key={index} className="text-[#888]">
-                                  {item}
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </motion.div>
-
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4, delay: 0.2 }}
-                    >
-                      <Card className="bg-[#1a1a1a] border-0">
-                        <CardContent className="p-6">
-                          <div className="space-y-4">
-                            <div className="flex items-center">
-                              <div className="flex items-center">
-                                <div>
-                                  <h3 className="text-2xl font-semibold text-white">Frontend Developer</h3>
-                                  <p className="text-[#e64861] text-lg">Web Solutions Co.</p>
-                                </div>
-                              </div>
-                              <span className="text-sm text-muted-foreground shrink-0">2018 - 2021</span>
-                            </div>
-                            <ul className="space-y-2">
-                              {[
-                                "Developed responsive websites for clients across various industries",
-                                "Collaborated with designers to implement pixel-perfect UI components",
-                                "Built reusable code and libraries for future use",
-                                "Optimized applications for maximum speed and scalability",
-                              ].map((item, index) => (
-                                <li key={index} className="text-[#888]">
-                                  {item}
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </motion.div>
+                            </CardContent>
+                          </Card>
+                        </motion.div>
+                      );
+                    })}
                   </TabsContent>
-
                   <TabsContent value="education" className="mt-6 space-y-6">
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4 }}
-                    >
-                      <Card className="bg-[#1a1a1a] border-0">
-                        <CardContent className="p-6">
-                          <div className="space-y-4">
-                            <div className="flex items-center">
-                              <div className="flex items-center">
-                                <div>
-                                  <h3 className="text-2xl font-semibold text-white">Master of Computer Science</h3>
-                                  <p className="text-[#e64861] text-lg">University of Technology</p>
+                    {education.map((edu, index) => {
+                      return (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.4, delay: index * 0.2 }}
+                        >
+                          <Card className="bg-[#1a1a1a] border-0">
+                            <CardContent className="p-6">
+                              <div className="flex justify-between items-start">
+                                <div className="flex items-center">
+                                  <div>
+                                    <h3 className="text-2xl font-semibold text-white">
+                                      {edu.degree}
+                                    </h3>
+                                    <p className="text-[#e64861] text-lg">
+                                      {edu.school}
+                                    </p>
+                                  </div>
                                 </div>
+                                <span className="text-sm text-muted-foreground shrink-0 pt-2">
+                                  {edu.graduation}
+                                </span>
                               </div>
-                              <span className="text-sm text-muted-foreground shrink-0">2016 - 2018</span>
-                            </div>
-                            <p className="text-[#888]">
-                              Specialized in Web Technologies and Human-Computer Interaction. Thesis: "Improving Web
-                              Accessibility Through Automated Testing"
-                            </p>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </motion.div>
-
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4, delay: 0.2 }}
-                    >
-                      <Card className="bg-[#1a1a1a] border-0">
-                        <CardContent className="p-6">
-                          <div className="space-y-4">
-                            <div className="flex items-center">
-                              <div className="flex items-center">
-                                <div>
-                                  <h3 className="text-2xl font-semibold text-white">
-                                    Bachelor of Science in Computer Science
-                                  </h3>
-                                  <p className="text-[#e64861] text-lg">State University</p>
-                                </div>
-                              </div>
-                              <span className="text-sm text-muted-foreground shrink-0">2012 - 2016</span>
-                            </div>
-                            <p className="text-[#888]">
-                              Graduated with honors. Participated in the Web Development Club and contributed to
-                              open-source projects.
-                            </p>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </motion.div>
+                            </CardContent>
+                          </Card>
+                        </motion.div>
+                      );
+                    })}
                   </TabsContent>
                 </Tabs>
               </ScrollAnimation>
@@ -389,32 +368,55 @@ export default function Home() {
             <div className="mx-auto max-w-[64rem] space-y-8">
               <ScrollAnimation>
                 <div className="space-y-2 text-center">
-                  <div className="font-mono text-sm text-primary">04 // projects</div>
-                  <h2 className="font-heading text-3xl leading-[1.1] sm:text-4xl md:text-5xl">WHAT I'VE BUILT</h2>
-                  <p className="font-mono text-muted-foreground md:text-lg">Check out some of my recent work</p>
+                  <div className="font-mono text-sm text-primary">
+                    04 // projects
+                  </div>
+                  <h2 className="font-heading text-3xl leading-[1.1] sm:text-4xl md:text-5xl">
+                    WHAT I'VE BUILT
+                  </h2>
+                  <p className="font-mono text-muted-foreground md:text-lg">
+                    Check out some of my recent work
+                  </p>
                 </div>
               </ScrollAnimation>
 
               <div className="grid gap-8 md:grid-cols-2">
                 {[
                   {
-                    title: "E-commerce Platform",
+                    title: "RoastTime",
                     description:
-                      "A full-stack e-commerce platform built with Next.js, TypeScript, and Stripe integration.",
-                    tags: ["Next.js", "TypeScript", "Stripe", "Tailwind CSS"],
-                    image: "/placeholder.svg?height=300&width=400",
-                    link: "#",
-                    frontendGithub: "https://github.com/username/ecommerce-frontend",
-                    backendGithub: "https://github.com/username/ecommerce-backend",
+                      "A full-stack application that reserves coffee shop table.",
+                    tags: [
+                      "Tailwind",
+                      "Javascript",
+                      "Typescript",
+                      "React",
+                      "Nextjs",
+                      "Jest",
+                      "JWT",
+                      "Node",
+                      "Postgres",
+                      "Prisma",
+                      "GA",
+                      "Contentful",
+                    ],
+                    image: "/images/roast-time.png?height=300&width=400",
+                    link: "https://roast-time.vercel.app/",
+                    frontendGithub: "https://github.com/natnaelh14/roast-time",
+                    backendGithub:
+                      "https://github.com/natnaelh14/roast-time-backend",
                   },
                   {
                     title: "Task Management App",
-                    description: "A collaborative task management application with real-time updates using WebSockets.",
+                    description:
+                      "A collaborative task management application with real-time updates using WebSockets.",
                     tags: ["React", "Node.js", "Socket.io", "MongoDB"],
                     image: "/placeholder.svg?height=300&width=400",
                     link: "#",
-                    frontendGithub: "https://github.com/username/task-manager-frontend",
-                    backendGithub: "https://github.com/username/task-manager-backend",
+                    frontendGithub:
+                      "https://github.com/username/task-manager-frontend",
+                    backendGithub:
+                      "https://github.com/username/task-manager-backend",
                   },
                 ].map((project, index) => (
                   <StaggerAnimation key={project.title} delay={index * 0.1}>
@@ -436,8 +438,12 @@ export default function Home() {
             <div className="mx-auto max-w-[64rem] space-y-8">
               <ScrollAnimation>
                 <div className="space-y-2 text-center">
-                  <div className="font-mono text-sm text-primary">05 // contact</div>
-                  <h2 className="font-heading text-3xl leading-[1.1] sm:text-4xl md:text-5xl">GET IN TOUCH</h2>
+                  <div className="font-mono text-sm text-primary">
+                    05 // contact
+                  </div>
+                  <h2 className="font-heading text-3xl leading-[1.1] sm:text-4xl md:text-5xl">
+                    GET IN TOUCH
+                  </h2>
                   <p className="font-mono text-muted-foreground md:text-lg">
                     Have a project in mind? Let's work together!
                   </p>
@@ -448,37 +454,42 @@ export default function Home() {
                 <ScrollAnimation>
                   <div className="space-y-6">
                     <div className="space-y-2">
-                      <h3 className="text-xl font-semibold font-mono">Contact Information</h3>
+                      <h3 className="text-xl font-semibold font-mono">
+                        Contact Information
+                      </h3>
                       <p className="text-muted-foreground">
-                        Feel free to reach out through the contact form or directly via email or phone.
+                        Feel free to reach out through the contact form or
+                        directly via email or phone.
                       </p>
                     </div>
 
                     <div className="space-y-4">
                       <div className="flex items-center gap-3">
                         <Mail className="h-5 w-5 text-primary" />
-                        <span className="font-mono">email@example.com</span>
+                        <span className="font-mono">
+                          haile.natnael@natnaeldev.com
+                        </span>
                       </div>
                       <div className="flex items-center gap-3">
                         <Github className="h-5 w-5 text-primary" />
                         <Link
-                          href="https://github.com"
+                          href="https://github.com/natnaelh14"
                           className="font-mono hover:text-primary"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          github.com/username
+                          https://github.com/natnaelh14
                         </Link>
                       </div>
                       <div className="flex items-center gap-3">
                         <Linkedin className="h-5 w-5 text-primary" />
                         <Link
-                          href="https://linkedin.com"
+                          href="https://www.linkedin.com/in/natnaelhaile/"
                           className="font-mono hover:text-primary"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          linkedin.com/in/username
+                          https://www.linkedin.com/in/natnaelhaile/
                         </Link>
                       </div>
                     </div>
@@ -501,22 +512,30 @@ export default function Home() {
       <footer className="relative border-t py-6 md:py-0">
         <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
           <p className="text-center text-sm font-mono leading-loose text-muted-foreground md:text-left">
-            © {new Date().getFullYear()} Portfolio. All rights reserved.
+            © {new Date().getFullYear()} Natnael Haile. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <Link href="https://github.com" target="_blank" rel="noopener noreferrer">
+            <Link
+              href="https://github.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Button variant="ghost" size="icon">
                 <Github className="h-5 w-5" />
                 <span className="sr-only">GitHub</span>
               </Button>
             </Link>
-            <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+            <Link
+              href="https://www.linkedin.com/in/natnaelhaile/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Button variant="ghost" size="icon">
                 <Linkedin className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
               </Button>
             </Link>
-            <Link href="mailto:email@example.com">
+            <Link href="mailto:haile.natnael@natnaeldev.com">
               <Button variant="ghost" size="icon">
                 <Mail className="h-5 w-5" />
                 <span className="sr-only">Email</span>
@@ -526,6 +545,5 @@ export default function Home() {
         </div>
       </footer>
     </div>
-  )
+  );
 }
-
