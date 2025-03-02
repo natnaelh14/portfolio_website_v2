@@ -1,3 +1,4 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
   content: [
@@ -16,6 +17,15 @@ module.exports = {
       },
     },
     extend: {
+      keyframes: {
+        loaderComplete: {
+          "0%": { strokeDashoffset: "805" },
+          "100%": { strokeDashoffset: "0" },
+        },
+      },
+      animation: {
+        loaderComplete: "loaderComplete 1s ease-in-out 0.5s forwards",
+      },
       fontFamily: {
         heading: ["var(--font-space-grotesk)", "sans-serif"],
         mono: ["var(--font-fira-code)", "monospace"],
@@ -77,5 +87,4 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
-
+};
