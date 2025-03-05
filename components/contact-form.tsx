@@ -1,64 +1,111 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { motion } from "framer-motion"
+import type React from "react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { motion } from "framer-motion";
+import toast, { Toaster } from "react-hot-toast";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import emailjs from "emailjs-com";
+import { useForm } from "react-hook-form";
+
+const userSchema = z.object({
+  firstName: z.string().min(1, { message: "Please enter a first name" }),
+  lastName: z.string().min(1, { message: "Please enter a last name" }),
+  email: z
+    .string()
+    .min(1, { message: "Please enter an email address" })
+    .email({ message: "Invalid email address" }),
+  subject: z.string().min(1, { message: "Please enter a subject" }),
+  message: z.string().min(1, { message: "Please enter a message" }),
+  serverError: z.void(),
+});
+type User = z.infer<typeof userSchema>;
 
 export function ContactForm() {
+  const successNotify = () =>
+    toast("Thank you! Your message has been sent successfully.", {
+      icon: "🔥",
+      style: {
+        borderRadius: "10px",
+        background: "#333",
+        color: "#fff",
+      },
+    });
   const [formState, setFormState] = useState({
     name: "",
     email: "",
     subject: "",
     message: "",
-  })
+  });
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors, isSubmitting },
+    reset,
+  } = useForm<User>({
+    resolver: zodResolver(userSchema),
+    mode: "onSubmit",
+  });
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormState((prev) => ({ ...prev, [name]: value }))
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-
-    setIsSubmitting(false)
-    setIsSubmitted(true)
-    setFormState({
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-    })
-
-    // Reset success message after 5 seconds
-    setTimeout(() => {
-      setIsSubmitted(false)
-    }, 5000)
-  }
+  const onSubmit = (data: User) => {
+    const templateParams = {
+      from_name: `${data.firstName}&nbsp;${data.lastName}`,
+      from_email: data.email,
+      to_name: "Natnael Haile",
+      subject: data.subject,
+      message: data.message,
+    };
+    emailjs
+      .send(
+        "service_9iw249h",
+        "template_18f6zsf",
+        templateParams,
+        "user_eZV3e0rLSAkwzx3Pvay2V"
+      )
+      .then(() => {
+        reset();
+        successNotify();
+      })
+      .catch(() => {
+        setError("serverError", {
+          type: "server",
+          message: "Unable to send message. Please try again.",
+        });
+      });
+  };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="space-y-4">
         <div className="grid gap-2">
           <Label htmlFor="name" className="font-mono">
-            Name
+            First Name
           </Label>
           <Input
             id="name"
-            name="name"
-            placeholder="Your name"
+            placeholder="First name"
             value={formState.name}
-            onChange={handleChange}
+            {...register("firstName")}
+            required
+            className="bg-background/50 backdrop-blur-sm"
+          />
+        </div>
+
+        <div className="grid gap-2">
+          <Label htmlFor="name" className="font-mono">
+            Last Name
+          </Label>
+          <Input
+            id="name"
+            placeholder="Last name"
+            value={formState.name}
+            {...register("lastName")}
             required
             className="bg-background/50 backdrop-blur-sm"
           />
@@ -70,11 +117,10 @@ export function ContactForm() {
           </Label>
           <Input
             id="email"
-            name="email"
             type="email"
             placeholder="Your email"
             value={formState.email}
-            onChange={handleChange}
+            {...register("email")}
             required
             className="bg-background/50 backdrop-blur-sm"
           />
@@ -86,10 +132,9 @@ export function ContactForm() {
           </Label>
           <Input
             id="subject"
-            name="subject"
             placeholder="Subject"
             value={formState.subject}
-            onChange={handleChange}
+            {...register("subject")}
             required
             className="bg-background/50 backdrop-blur-sm"
           />
@@ -101,10 +146,9 @@ export function ContactForm() {
           </Label>
           <Textarea
             id="message"
-            name="message"
             placeholder="Your message"
             value={formState.message}
-            onChange={handleChange}
+            {...register("message")}
             rows={5}
             required
             className="bg-background/50 backdrop-blur-sm"
@@ -112,22 +156,13 @@ export function ContactForm() {
         </div>
       </div>
 
-      <div>
-        {isSubmitted ? (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="p-3 rounded-md bg-primary/10 backdrop-blur-sm text-primary font-mono text-center"
-          >
-            Thank you! Your message has been sent successfully.
-          </motion.div>
-        ) : (
-          <Button type="submit" className="w-full font-mono" disabled={isSubmitting}>
-            {isSubmitting ? "Sending..." : "Send Message"}
-          </Button>
-        )}
-      </div>
+      <Button
+        type="submit"
+        className="w-full font-mono"
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? "Sending..." : "Send Message"}
+      </Button>
     </form>
-  )
+  );
 }
-

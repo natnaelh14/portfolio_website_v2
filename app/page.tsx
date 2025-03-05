@@ -21,9 +21,11 @@ import {
   otherTech,
   workExperience,
   education,
+  projects,
 } from "@/constants";
 import { useEffect, useState } from "react";
 import { LoadAnimation } from "@/components/LoadAnimation/load-animation";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -332,7 +334,11 @@ export default function Home() {
                           <Card className="bg-[#1a1a1a] border-0">
                             <CardContent className="p-6">
                               <div className="flex justify-between items-start">
-                                <div className="flex items-center">
+                                <div className="flex items-center gap-4">
+                                  <Avatar>
+                                    <AvatarImage src={edu.logoUrl} />
+                                    <AvatarFallback>CN</AvatarFallback>
+                                  </Avatar>
                                   <div>
                                     <h3 className="text-2xl font-semibold text-white">
                                       {edu.degree}
@@ -381,44 +387,7 @@ export default function Home() {
               </ScrollAnimation>
 
               <div className="grid gap-8 md:grid-cols-2">
-                {[
-                  {
-                    title: "RoastTime",
-                    description:
-                      "A full-stack application that reserves coffee shop table.",
-                    tags: [
-                      "Tailwind",
-                      "Javascript",
-                      "Typescript",
-                      "React",
-                      "Nextjs",
-                      "Jest",
-                      "JWT",
-                      "Node",
-                      "Postgres",
-                      "Prisma",
-                      "GA",
-                      "Contentful",
-                    ],
-                    image: "/images/roast-time.png?height=300&width=400",
-                    link: "https://roast-time.vercel.app/",
-                    frontendGithub: "https://github.com/natnaelh14/roast-time",
-                    backendGithub:
-                      "https://github.com/natnaelh14/roast-time-backend",
-                  },
-                  {
-                    title: "Task Management App",
-                    description:
-                      "A collaborative task management application with real-time updates using WebSockets.",
-                    tags: ["React", "Node.js", "Socket.io", "MongoDB"],
-                    image: "/placeholder.svg?height=300&width=400",
-                    link: "#",
-                    frontendGithub:
-                      "https://github.com/username/task-manager-frontend",
-                    backendGithub:
-                      "https://github.com/username/task-manager-backend",
-                  },
-                ].map((project, index) => (
+                {projects.map((project, index) => (
                   <StaggerAnimation key={project.title} delay={index * 0.1}>
                     <ProjectCard {...project} />
                   </StaggerAnimation>

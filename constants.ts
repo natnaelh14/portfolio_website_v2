@@ -71,20 +71,73 @@ export const education = [
     school: "Graceland University",
     degree: "Bachelor of Science in Nursing",
     graduation: "2014",
+    logoUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/8/8a/Graceland_University_shield.svg",
   },
   {
     school: "Georgia Institute of Technology",
     degree: "Full-Stack Web Development Certificate",
     graduation: "2021",
+    logoUrl:
+      "https://brand.gatech.edu/sites/default/files/inline-images/GTVertical_RGB.png",
   },
   {
     school: "Microsoft",
-    degree: "Microsoft Certified: Azure Fundamentals",
+    degree: "MS Certified: Azure Fundamentals",
     graduation: "2024",
+    logoUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure.svg",
   },
   {
     school: "Microsoft",
-    degree: "Microsoft Certified: Azure AI Fundamentals",
+    degree: "MS Certified: Azure AI Fundamentals",
     graduation: "2025",
+    logoUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure.svg",
   },
 ] as const;
+
+export const projects = [
+  {
+    title: "RoastTime",
+    description: "A full-stack application that reserves coffee shop table.",
+    tags: [
+      "Tailwind",
+      "Javascript",
+      "Typescript",
+      "React",
+      "Nextjs",
+      "Jest",
+      "JWT",
+      "Node",
+      "Postgres",
+      "Prisma",
+      "GA",
+      "Contentful",
+    ],
+    image: "/images/roast-time.png?height=300&width=400",
+    link: "https://roast-time.vercel.app/",
+    frontendGithub: "https://github.com/natnaelh14/roast-time",
+    backendGithub: "https://github.com/natnaelh14/roast-time-backend",
+  },
+  {
+    title: "Crypto Connect",
+    description:
+      "A full-stack social media application based on cryptocurrency.",
+    tags: [
+      "Typescript",
+      "React",
+      "Redux",
+      "NodeJS",
+      "Graphql",
+      "MySQL",
+      "Firebase",
+      "Docker",
+      "Github Actions",
+    ],
+    image: "/images/crypto-connect.png?height=300&width=400",
+    link: "https://social-media-app-six-blond.vercel.app",
+    frontendGithub: "https://github.com/natnaelh14/social-media-app",
+    backendGithub: "https://github.com/natnaelh14/social-media-api",
+  },
+];

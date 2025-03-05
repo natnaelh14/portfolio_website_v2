@@ -26,7 +26,7 @@ export function ProjectCard({
   link,
   frontendGithub,
   backendGithub,
-}: ProjectCardProps) {
+}: Readonly<ProjectCardProps>) {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
