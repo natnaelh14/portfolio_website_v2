@@ -1,6 +1,13 @@
 "use client";
 
-import { Download, Mail, Github, Linkedin, Twitter } from "lucide-react";
+import {
+  Download,
+  Mail,
+  Github,
+  Linkedin,
+  Twitter,
+  ArrowRight,
+} from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ProjectCard } from "@/components/project-card";
@@ -57,7 +64,12 @@ export default function Home() {
           </nav>
           <div className="flex items-center gap-2">
             <Button variant="outline" size="sm" className="gap-1" asChild>
-              <Link href="/resume.pdf" download>
+              <Link
+                href="/resume.pdf"
+                download
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Download className="h-4 w-4" />
                 Resume
               </Link>
@@ -160,7 +172,7 @@ export default function Home() {
                       WHO I AM
                     </h2>
                   </div>
-                  <p className="text-muted-foreground text-center">
+                  <p className="text-muted-foreground text-justify">
                     I am a Full-Stack Software Engineer with a Bachelor's Degree
                     and 3 years of professional development experience.
                     Proactive team player with great adaptability in dynamic

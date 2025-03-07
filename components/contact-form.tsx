@@ -1,13 +1,11 @@
 "use client";
 
 import type React from "react";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { motion } from "framer-motion";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import emailjs from "emailjs-com";
@@ -36,12 +34,7 @@ export function ContactForm() {
         color: "#fff",
       },
     });
-  const [formState, setFormState] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
+
   const {
     register,
     handleSubmit,
@@ -63,7 +56,7 @@ export function ContactForm() {
     };
     emailjs
       .send(
-        "service_9iw249h",
+        "service_94qhwmk",
         "template_18f6zsf",
         templateParams,
         "user_eZV3e0rLSAkwzx3Pvay2V"
@@ -90,7 +83,6 @@ export function ContactForm() {
           <Input
             id="name"
             placeholder="First name"
-            value={formState.name}
             {...register("firstName")}
             required
             className="bg-background/50 backdrop-blur-sm"
@@ -104,7 +96,6 @@ export function ContactForm() {
           <Input
             id="name"
             placeholder="Last name"
-            value={formState.name}
             {...register("lastName")}
             required
             className="bg-background/50 backdrop-blur-sm"
@@ -119,7 +110,6 @@ export function ContactForm() {
             id="email"
             type="email"
             placeholder="Your email"
-            value={formState.email}
             {...register("email")}
             required
             className="bg-background/50 backdrop-blur-sm"
@@ -133,7 +123,6 @@ export function ContactForm() {
           <Input
             id="subject"
             placeholder="Subject"
-            value={formState.subject}
             {...register("subject")}
             required
             className="bg-background/50 backdrop-blur-sm"
@@ -147,7 +136,6 @@ export function ContactForm() {
           <Textarea
             id="message"
             placeholder="Your message"
-            value={formState.message}
             {...register("message")}
             rows={5}
             required

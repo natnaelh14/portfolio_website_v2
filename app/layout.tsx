@@ -2,6 +2,7 @@ import type React from "react";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk, Fira_Code } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 const spaceGrotesk = Space_Grotesk({
@@ -28,6 +29,7 @@ export default function RootLayout({
       <body
         className={`${inter.className} ${spaceGrotesk.variable} ${firaCode.variable}`}
       >
+        <Toaster />
         {children}
       </body>
     </html>

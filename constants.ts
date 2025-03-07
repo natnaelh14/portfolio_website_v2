@@ -39,7 +39,7 @@ export const navigationLinks = [
   { href: "#experience", label: "experience", number: "03" },
   { href: "#projects", label: "projects", number: "04" },
   { href: "#contact", label: "contact", number: "05" },
-] as const;
+];
 
 export const workExperience = [
   {
