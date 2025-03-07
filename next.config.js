@@ -1,9 +1,7 @@
 const nextConfig = {
+  output: "export",
   reactStrictMode: true,
-  images: {
-    domains: ["placeholder.com"],
-  },
-}
+  images: { unoptimized: true },
+};
 
-module.exports = nextConfig
-
+module.exports = nextConfig;
