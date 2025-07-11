@@ -100,7 +100,7 @@ export default function Home() {
                   />
                 </h1>
                 <p className="font-mono text-xl text-muted-foreground tracking-wide">
-                  FULL STACK SOFTWARE ENGINEER.
+                  SENIOR FULL STACK SOFTWARE ENGINEER.
                 </p>
               </div>
 

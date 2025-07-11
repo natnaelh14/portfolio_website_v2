@@ -2,7 +2,6 @@ export const frontEndTech = [
   "HTML5",
   "CSS3",
   "Tailwind",
-  "Styled Components",
   "JavaScript",
   "jQuery",
   "React",
@@ -13,8 +12,10 @@ export const frontEndTech = [
 
 export const backEndTech = [
   "Node/Express.js",
-  "MySQL",
-  "PostgreSQL",
+  "C#/.NET",
+  "Entity Framework",
+  "SQL",
+  "Redis",
   "Prisma",
   "GraphQL/Apollo",
   "Postman",
@@ -30,6 +31,8 @@ export const otherTech = [
   "Contentful",
   "Unit Testing",
   "Docker",
+  "Kubernetes",
+  "Apache Kafka",
   "Azure",
 ] as const;
 
@@ -43,15 +46,17 @@ export const navigationLinks = [
 
 export const workExperience = [
   {
-    title: "Software Engineer",
+    title: "Senior Software Engineer",
     company: "Tide Services, a P&G company",
     date: "Jan 2022 - Present",
     description: [
-      "Led the architecture, design, and development of two full-stack applications using NextJS, Nodejs, Typescript, and Tailwind.",
-      "Oversaw the health of the system, addressed performance issues, and enhanced application efficiency by employing techniques on both the server and client sides, resulting in a 25% reduction in server response time and a 20% improvement in client-side load times.",
-      "Collaborated with product and design team to implement user-centric features, boosting user engagement by 30%.",
-      "Developed unit and automation tests, achieving 90% code coverage to ensure high-quality software solutions.",
-      "Maintained an ASP.NET core product while debugging and resolving client and server issues.",
+      "Led the architecture, design, and development of two full-stack applications using NextJS, Tailwind, TypeScript, Node.js, Okta, Azure, and Contentful, resulting in two successful product launches that directly contributed to a 40% increase in annual recurring revenue.",
+      "Oversaw system health, addressing performance bottlenecks and enhancing application efficiency through targeted server and client-side optimizations, reducing response time by 30% and significantly improving user experience.",
+      "Collaborated cross-functionally with product and design teams to implement user-centric features, boosting user engagement by 50% and driving product adoption.",
+      "Developed comprehensive unit and automation tests, achieving 90% code coverage to ensure high-quality, reliable software solutions.",
+      "Engineered robust RESTful APIs in .NET to power core business features, supporting over 100,000 daily active users with seamless performance.",
+      "Managed CI/CD workflows and deployments to Azure environments, automating release processes and ensuring rapid, reliable software delivery.",
+      "Mentored junior developers, fostering a culture of knowledge sharing and continuous improvement within the team.",
     ],
   },
   {
